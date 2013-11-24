@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Web Juris - Sistema de Gestão para Advogados</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="title" content="Web Juris - Gestão para advogados" />
+	<meta name="description" content="Site description here" />
+	<meta name="keywords" content="keywords here" />
+	<meta name="language" content="en" />
+	<meta name="subject" content="Site subject here" />
+	<meta name="robots" content="All" />
+	<meta name="copyright" content="Your company" />
+	<meta name="abstract" content="Site description here" />
+	<meta name="MSSmartTagsPreventParsing" content="true" />
+	<link id="theme" rel="stylesheet" type="text/css" href="css/style2.css"
+		title="theme" />
+</h:head>
+<h:body>
+	<div id="wrapper">
+		<div id="bg">
+			<div id="header"></div>
+			<div id="page">
+				<div id="container">
+					<!-- menu -->
+
+					<ui:include src="layout/menu.xhtml" />
+
+					<!-- FIM do MENU -->
+					<!--  CONTEÚDO -->
+					<div id="content">
+						<div id="center">
+							<div id="welcome">
+								<h:messages />
+								<h:form styleClass="">
+
+									<p:panel header="Cadastro de Cliente">
+										<h:panelGrid columns="2" cellpadding="3" width="200"
+											columnClasses="" styleClass="">
+
+											<h:outputText value="Nome: " />
+											<p:inputText value="#{cadclienController.cadclien.nome}" />
+
+											<h:outputText value="Endereço: " />
+											<p:inputText value="#{cadclienController.cadclien.endereco}" />
+
+											<h:outputText value="Bairro: " />
+											<p:inputText value="#{cadclienController.cadclien.bairro}" />
+
+											<h:outputText value="CEP: " />
+											<p:inputMask value="#{cadclienController.cadclien.cep}"
+												mask="99999-999" />
+
+											<h:outputText value="Cidade: " />
+											<p:inputText value="#{cadclienController.cadclien.cidade}" />
+
+											<h:outputText value="Nº: " />
+											<p:inputText
+												value="#{cadclienController.cadclien.numero_casa}">
+												<f:convertNumber integerOnly="true" />
+											</p:inputText>
+
+											<h:outputText value="Telefone: " />
+											<p:inputMask value="#{cadclienController.cadclien.telefone}"
+												mask="(99)9999-9999" />
+
+											<h:outputText value="CPF: " />
+											<p:inputMask value="#{cadclienController.cadclien.cpf}"
+												mask="999.999.999-99" />
+
+											<h:outputText value="RG: " />
+											<p:inputText value="#{cadclienController.cadclien.rg}">
+												<f:convertNumber integerOnly="true" />
+											</p:inputText>
+
+											<h:outputText value="Nascimento: " />
+											<p:inputMask
+												value="#{cadclienController.cadclien.dat_nascimento}"
+												mask="99/99/9999">
+												<f:convertDateTime pattern="dd/MM/yyyy" />
+											</p:inputMask>
+
+											<h:outputText value="Observação: " />
+											<p:inputTextarea
+												value="#{cadclienController.cadclien.observacao}" cols="30"
+												rows="4" autoResize="true" maxlength="255" />
+
+											<h:outputText value="Situação: " />
+											<p:selectOneMenu
+												value="#{cadclienController.cadclien.flg_ativo}">
+												<f:selectItem itemLabel="Ativo" itemValue="A" />
+												<f:selectItem itemLabel="Inativo" itemValue="I" />
+											</p:selectOneMenu>
+
+											<h:commandButton
+												action="#{cadclienController.adicionarCliente}"
+												value="Salvar" />
+											<h:commandButton action="#{cadclienController.limpar}"
+												value="Limpar" />
+
+
+										</h:panelGrid>
+									</p:panel>
+								</h:form>
+								<br/>
+								<h:form>
+									<p:dataTable var="cliente"
+										value="#{cadclienController.listaCliente}" styleClass="">
+
+										<p:column headerText="Código">
+											<h:outputText value="#{cliente.id_clien}" />
+										</p:column>
+										<p:column headerText="Nome">
+											<h:outputText value="#{cliente.nome}" />
+										</p:column>
+
+										<p:column headerText="Cidade">
+											<h:outputText value="#{cliente.cidade}" />
+										</p:column>
+
+										<p:column headerText="Telefone">
+											<h:outputText value="#{cliente.telefone}" />
+										</p:column>
+
+										<p:column headerText="CPF">
+											<h:outputText value="#{cliente.cpf}" />
+										</p:column>
+
+										<p:column headerText="Data de Nascimento">
+											<h:outputText value="#{cliente.dat_nascimento}">
+												<f:convertDateTime pattern="dd/MM/yyyy" />
+											</h:outputText>
+										</p:column>
+
+										<p:column headerText="Status">
+											<h:outputText value="#{cliente.flg_ativo}" />
+										</p:column>
+
+										<p:column headerText="Alterar">
+											<h:commandButton
+												action="#{cadclienController.preparaAlterarCliente}"
+												value="Alterar" />
+										</p:column>
+
+										<p:column headerText="Excluir">
+											<h:commandButton
+												action="#{cadclienController.excluirCliente}"
+												value="Excluir" />
+										</p:column>
+									</p:dataTable>
+								</h:form>
+							</div>
+						</div>
+					</div>
+					<!-- Roda pé -->
+					<ui:include src="layout/footer.xhtml" />
+				</div>
+			</div>
+		</div>
+	</div>
+</h:body>
+</html>
